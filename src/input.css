@@ -20,29 +20,29 @@
     }
 
     .animated-border::before {
-      content: '';
-      position: absolute;
-      z-index: -2;
-      inset: -50%;
-      background: conic-gradient(from 0deg,
-          transparent 0 180deg,
-          rgba(255, 255, 255, 0.1) 220deg,
-          rgba(255, 255, 255, 0.5) 280deg,
-          #ffffff 360deg);
-      animation: border-rotate 4s linear infinite;
-      filter: blur(20px) brightness(0.1);
+        content: '';
+        position: absolute;
+        z-index: -2;
+        inset: -50%;
+        background: conic-gradient(from 0deg,
+                transparent 0 180deg,
+                rgba(255, 255, 255, 0.1) 220deg,
+                rgba(255, 255, 255, 0.5) 280deg,
+                #ffffff 360deg);
+        animation: border-rotate 4s linear infinite;
+        filter: blur(8px) brightness(1.5);
     }
 
     /* Inner background mask - Dark Theme */
     .animated-border::after {
-      content: '';
-      position: absolute;
-      z-index: -1;
-      inset: 1px;
-      /* Larger border width */
-      background: #030c20;
-      /* Slate 900 */
-      border-radius: calc(1rem - 1px);
+        content: '';
+        position: absolute;
+        z-index: -1;
+        inset: 4px;
+        /* Larger border width */
+        background: #0f172a;
+        /* Slate 900 */
+        border-radius: calc(1rem - 4px);
     }
 
     /* Ensure content stays on top of pseudo-elements */
