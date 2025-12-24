@@ -1,15 +1,15 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Link Manager</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stacked List Clipboard</title>
+  <link rel="stylesheet" href="./assets/output.css">
+  <script src="./node_modules/@iconify/iconify/dist/iconify.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -17,11 +17,12 @@
     }
 
     .card .meta-bar {
-      transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s ease;
+      transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .card:hover .meta-bar {
-      background-color: #473fb3;
+      background-color: #0a5fd4;
+      /* Slate 700 */
     }
 
     .share-btn {
@@ -41,29 +42,78 @@
     .card:hover .bg-img {
       transform: scale(1.1);
     }
+
+    /* Modern Futuristic Animated Border */
+    @keyframes border-rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .animated-border {
+      position: relative;
+      z-index: 0;
+      /* overflow: hidden is already on the element */
+    }
+
+    .animated-border::before {
+      content: '';
+      position: absolute;
+      z-index: -2;
+      inset: -50%;
+      background: conic-gradient(from 0deg,
+          transparent 0 180deg,
+          rgba(255, 255, 255, 0.1) 220deg,
+          rgba(255, 255, 255, 0.5) 280deg,
+          #ffffff 360deg);
+      animation: border-rotate 4s linear infinite;
+      filter: blur(8px) brightness(1.5);
+    }
+
+    /* Inner background mask - Dark Theme */
+    .animated-border::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      inset: 1px;
+      /* Larger border width */
+      background: #667088;
+      /* Slate 900 */
+      border-radius: calc(1rem - 1px);
+    }
+
+    /* Ensure content stays on top and receives clicks */
+    .animated-border>* {
+      position: relative;
+      z-index: 1;
+    }
   </style>
 </head>
 
-<body class="bg-gray-50/50 min-h-screen pt-8 px-4 text-slate-900">
-  <!-- Main Container – Enhanced border & shadow -->
-  <div
-    class="w-full max-w-md bg-white rounded-2xl border-2 border-indigo-200 shadow-xl shadow-indigo-100/50 overflow-hidden mx-auto">
+<body class="bg-gray-950 min-h-screen pt-8 px-4 text-slate-200">
+  <!-- Main Container -->
+  <div class="animated-border w-full max-w-md rounded-2xl shadow-2xl overflow-hidden mx-auto">
     <!-- Header Area -->
-    <div class="px-8 py-6 border-b border-indigo-100 flex items-center justify-between bg-white">
+    <div class="px-8 py-6 border-b border-gray-700 flex items-center justify-between bg-slate-900">
       <div class="flex items-center gap-3">
-        <span class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-indigo-50 text-indigo-600">
+        <span
+          class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-slate-800 text-gray-300 border border-slate-700">
           <span class="iconify" data-icon="lucide:link" data-width="18" data-height="18"></span>
         </span>
-        <h1 class="text-base font-semibold tracking-tight text-gray-900">Link Manager</h1>
+        <h1 class="text-base font-semibold tracking-tight text-white">Link Manager</h1>
       </div>
-      <span class="text-xs font-medium text-gray-600">8 Items</span>
+      <span class="text-xs font-medium text-gray-500">8 Items</span>
     </div>
 
     <!-- Stacked List -->
     <div class="flex flex-col gap-3 px-6 py-6">
       <!-- Card 1 -->
       <div
-        class="card group relative h-16 w-full cursor-pointer overflow-hidden rounded-lg border border-indigo-100 group-hover:border-indigo-300 shadow shadow-indigo-50"
+        class="card group relative h-16 w-full cursor-pointer overflow-hidden rounded-lg border border-gray-700 hover:border-gray-500 shadow-sm transition-colors"
         data-link="https://linear.app/feature/1">
         <div class="absolute inset-0 z-0">
           <img class="bg-img h-full w-full object-cover opacity-25 group-hover:opacity-15 transition-opacity"
@@ -71,16 +121,16 @@
             alt="Abstract">
         </div>
         <div
-          class="meta-bar absolute inset-0 z-10 flex items-center justify-between px-6 bg-white/95 backdrop-blur-md group-hover:text-white rounded-lg">
+          class="meta-bar absolute inset-0 z-10 flex items-center justify-between px-6 bg-slate-900/90 backdrop-blur-sm group-hover:text-white rounded-lg border border-white/5">
           <div class="flex items-center gap-4">
-            <span class="iconify text-gray-700 group-hover:text-white/80 transition-colors" data-icon="lucide:link"
+            <span class="iconify text-gray-400 group-hover:text-white/90 transition-colors" data-icon="lucide:link"
               data-width="16"></span>
             <span
-              class="text-sm font-semibold tracking-tight text-gray-900 group-hover:text-white transition-colors">Project
+              class="text-sm font-medium tracking-tight text-gray-200 group-hover:text-white transition-colors">Project
               Dashboard</span>
           </div>
           <button
-            class="share-btn flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md border border-gray-300 bg-white text-xs font-semibold tracking-wide text-gray-700 shadow-sm hover:border-white/20 hover:bg-white/10 hover:text-white">
+            class="share-btn flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md border border-gray-600 bg-slate-800 text-xs font-semibold tracking-wide text-gray-300 shadow-sm hover:border-white/40 hover:bg-slate-700 hover:text-white">
             <span>Copy</span>
             <span class="iconify" data-icon="lucide:copy" data-width="12"></span>
           </button>
@@ -89,7 +139,7 @@
 
       <!-- Card 2 -->
       <div
-        class="card group relative h-16 w-full cursor-pointer overflow-hidden rounded-lg border border-indigo-100 group-hover:border-indigo-300 shadow shadow-indigo-50"
+        class="card group relative h-16 w-full cursor-pointer overflow-hidden rounded-lg border border-gray-700 hover:border-gray-500 shadow-sm transition-colors"
         data-link="https://stripe.com/payments/2">
         <div class="absolute inset-0 z-0">
           <img class="bg-img h-full w-full object-cover opacity-25 group-hover:opacity-15 transition-opacity"
@@ -97,16 +147,16 @@
             alt="Abstract">
         </div>
         <div
-          class="meta-bar absolute inset-0 z-10 flex items-center justify-between px-6 bg-white/95 backdrop-blur-md group-hover:text-white rounded-lg">
+          class="meta-bar absolute inset-0 z-10 flex items-center justify-between px-6 bg-slate-900/90 backdrop-blur-sm group-hover:text-white rounded-lg border border-white/5">
           <div class="flex items-center gap-4">
-            <span class="iconify text-gray-700 group-hover:text-white/80 transition-colors"
+            <span class="iconify text-gray-400 group-hover:text-white/90 transition-colors"
               data-icon="lucide:credit-card" data-width="16"></span>
             <span
-              class="text-sm font-semibold tracking-tight text-gray-900 group-hover:text-white transition-colors">Payment
+              class="text-sm font-medium tracking-tight text-gray-200 group-hover:text-white transition-colors">Payment
               Gateway</span>
           </div>
           <button
-            class="share-btn flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md border border-gray-300 bg-white text-xs font-semibold tracking-wide text-gray-700 shadow-sm hover:border-white/20 hover:bg-white/10 hover:text-white">
+            class="share-btn flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md border border-gray-600 bg-slate-800 text-xs font-semibold tracking-wide text-gray-300 shadow-sm hover:border-white/40 hover:bg-slate-700 hover:text-white">
             <span>Copy</span>
             <span class="iconify" data-icon="lucide:copy" data-width="12"></span>
           </button>
@@ -115,7 +165,7 @@
 
       <!-- Card 3 -->
       <div
-        class="card group relative h-16 w-full cursor-pointer overflow-hidden rounded-lg border border-indigo-100 group-hover:border-indigo-300 shadow shadow-indigo-50"
+        class="card group relative h-16 w-full cursor-pointer overflow-hidden rounded-lg border border-gray-700 hover:border-gray-500 shadow-sm transition-colors"
         data-link="https://vercel.com/deploy/3">
         <div class="absolute inset-0 z-0">
           <img class="bg-img h-full w-full object-cover opacity-25 group-hover:opacity-15 transition-opacity"
@@ -123,16 +173,16 @@
             alt="Abstract">
         </div>
         <div
-          class="meta-bar absolute inset-0 z-10 flex items-center justify-between px-6 bg-white/95 backdrop-blur-md group-hover:text-white rounded-lg">
+          class="meta-bar absolute inset-0 z-10 flex items-center justify-between px-6 bg-slate-900/90 backdrop-blur-sm group-hover:text-white rounded-lg border border-white/5">
           <div class="flex items-center gap-4">
-            <span class="iconify text-gray-700 group-hover:text-white/80 transition-colors" data-icon="lucide:box"
+            <span class="iconify text-gray-400 group-hover:text-white/90 transition-colors" data-icon="lucide:box"
               data-width="16"></span>
             <span
-              class="text-sm font-semibold tracking-tight text-gray-900 group-hover:text-white transition-colors">Deployment
+              class="text-sm font-medium tracking-tight text-gray-200 group-hover:text-white transition-colors">Deployment
               Logs</span>
           </div>
           <button
-            class="share-btn flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md border border-gray-300 bg-white text-xs font-semibold tracking-wide text-gray-700 shadow-sm hover:border-white/20 hover:bg-white/10 hover:text-white">
+            class="share-btn flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md border border-gray-600 bg-slate-800 text-xs font-semibold tracking-wide text-gray-300 shadow-sm hover:border-white/40 hover:bg-slate-700 hover:text-white">
             <span>Copy</span>
             <span class="iconify" data-icon="lucide:copy" data-width="12"></span>
           </button>
@@ -141,7 +191,7 @@
 
       <!-- Card 4 -->
       <div
-        class="card group relative h-16 w-full cursor-pointer overflow-hidden rounded-lg border border-indigo-100 group-hover:border-indigo-300 shadow shadow-indigo-50"
+        class="card group relative h-16 w-full cursor-pointer overflow-hidden rounded-lg border border-gray-700 hover:border-gray-500 shadow-sm transition-colors"
         data-link="https://github.com/repo/4">
         <div class="absolute inset-0 z-0">
           <img class="bg-img h-full w-full object-cover opacity-25 group-hover:opacity-15 transition-opacity"
@@ -149,16 +199,16 @@
             alt="Abstract">
         </div>
         <div
-          class="meta-bar absolute inset-0 z-10 flex items-center justify-between px-6 bg-white/95 backdrop-blur-md group-hover:text-white rounded-lg">
+          class="meta-bar absolute inset-0 z-10 flex items-center justify-between px-6 bg-slate-900/90 backdrop-blur-sm group-hover:text-white rounded-lg border border-white/5">
           <div class="flex items-center gap-4">
-            <span class="iconify text-gray-700 group-hover:text-white/80 transition-colors"
+            <span class="iconify text-gray-400 group-hover:text-white/90 transition-colors"
               data-icon="lucide:git-branch" data-width="16"></span>
             <span
-              class="text-sm font-semibold tracking-tight text-gray-900 group-hover:text-white transition-colors">Repository
+              class="text-sm font-medium tracking-tight text-gray-200 group-hover:text-white transition-colors">Repository
               Settings</span>
           </div>
           <button
-            class="share-btn flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md border border-gray-300 bg-white text-xs font-semibold tracking-wide text-gray-700 shadow-sm hover:border-white/20 hover:bg-white/10 hover:text-white">
+            class="share-btn flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md border border-gray-600 bg-slate-800 text-xs font-semibold tracking-wide text-gray-300 shadow-sm hover:border-white/40 hover:bg-slate-700 hover:text-white">
             <span>Copy</span>
             <span class="iconify" data-icon="lucide:copy" data-width="12"></span>
           </button>
@@ -167,7 +217,7 @@
 
       <!-- Card 5 -->
       <div
-        class="card group relative h-16 w-full cursor-pointer overflow-hidden rounded-lg border border-indigo-100 group-hover:border-indigo-300 shadow shadow-indigo-50"
+        class="card group relative h-16 w-full cursor-pointer overflow-hidden rounded-lg border border-gray-700 hover:border-gray-500 shadow-sm transition-colors"
         data-link="https://figma.com/file/5">
         <div class="absolute inset-0 z-0">
           <img class="bg-img h-full w-full object-cover opacity-25 group-hover:opacity-15 transition-opacity"
@@ -175,16 +225,16 @@
             alt="Abstract">
         </div>
         <div
-          class="meta-bar absolute inset-0 z-10 flex items-center justify-between px-6 bg-white/95 backdrop-blur-md group-hover:text-white rounded-lg">
+          class="meta-bar absolute inset-0 z-10 flex items-center justify-between px-6 bg-slate-900/90 backdrop-blur-sm group-hover:text-white rounded-lg border border-white/5">
           <div class="flex items-center gap-4">
-            <span class="iconify text-gray-700 group-hover:text-white/80 transition-colors" data-icon="lucide:figma"
+            <span class="iconify text-gray-400 group-hover:text-white/90 transition-colors" data-icon="lucide:figma"
               data-width="16"></span>
             <span
-              class="text-sm font-semibold tracking-tight text-gray-900 group-hover:text-white transition-colors">Design
+              class="text-sm font-medium tracking-tight text-gray-200 group-hover:text-white transition-colors">Design
               System</span>
           </div>
           <button
-            class="share-btn flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md border border-gray-300 bg-white text-xs font-semibold tracking-wide text-gray-700 shadow-sm hover:border-white/20 hover:bg-white/10 hover:text-white">
+            class="share-btn flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md border border-gray-600 bg-slate-800 text-xs font-semibold tracking-wide text-gray-300 shadow-sm hover:border-white/40 hover:bg-slate-700 hover:text-white">
             <span>Copy</span>
             <span class="iconify" data-icon="lucide:copy" data-width="12"></span>
           </button>
@@ -193,7 +243,7 @@
 
       <!-- Card 6 -->
       <div
-        class="card group relative h-16 w-full cursor-pointer overflow-hidden rounded-lg border border-indigo-100 group-hover:border-indigo-300 shadow shadow-indigo-50"
+        class="card group relative h-16 w-full cursor-pointer overflow-hidden rounded-lg border border-gray-700 hover:border-gray-500 shadow-sm transition-colors"
         data-link="https://notion.so/wiki/6">
         <div class="absolute inset-0 z-0">
           <img class="bg-img h-full w-full object-cover opacity-25 group-hover:opacity-15 transition-opacity"
@@ -201,15 +251,15 @@
             alt="Abstract">
         </div>
         <div
-          class="meta-bar absolute inset-0 z-10 flex items-center justify-between px-6 bg-white/95 backdrop-blur-md group-hover:text-white rounded-lg">
+          class="meta-bar absolute inset-0 z-10 flex items-center justify-between px-6 bg-slate-900/90 backdrop-blur-sm group-hover:text-white rounded-lg border border-white/5">
           <div class="flex items-center gap-4">
-            <span class="iconify text-gray-700 group-hover:text-white/80 transition-colors" data-icon="lucide:file-text"
+            <span class="iconify text-gray-400 group-hover:text-white/90 transition-colors" data-icon="lucide:file-text"
               data-width="16"></span>
             <span
-              class="text-sm font-semibold tracking-tight text-gray-900 group-hover:text-white transition-colors">Documentation</span>
+              class="text-sm font-medium tracking-tight text-gray-200 group-hover:text-white transition-colors">Documentation</span>
           </div>
           <button
-            class="share-btn flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md border border-gray-300 bg-white text-xs font-semibold tracking-wide text-gray-700 shadow-sm hover:border-white/20 hover:bg-white/10 hover:text-white">
+            class="share-btn flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md border border-gray-600 bg-slate-800 text-xs font-semibold tracking-wide text-gray-300 shadow-sm hover:border-white/40 hover:bg-slate-700 hover:text-white">
             <span>Copy</span>
             <span class="iconify" data-icon="lucide:copy" data-width="12"></span>
           </button>
@@ -218,7 +268,7 @@
 
       <!-- Card 7 -->
       <div
-        class="card group relative h-16 w-full cursor-pointer overflow-hidden rounded-lg border border-indigo-100 group-hover:border-indigo-300 shadow shadow-indigo-50"
+        class="card group relative h-16 w-full cursor-pointer overflow-hidden rounded-lg border border-gray-700 hover:border-gray-500 shadow-sm transition-colors"
         data-link="https://slack.com/channels/7">
         <div class="absolute inset-0 z-0">
           <img class="bg-img h-full w-full object-cover opacity-25 group-hover:opacity-15 transition-opacity"
@@ -226,16 +276,15 @@
             alt="Abstract">
         </div>
         <div
-          class="meta-bar absolute inset-0 z-10 flex items-center justify-between px-6 bg-white/95 backdrop-blur-md group-hover:text-white rounded-lg">
+          class="meta-bar absolute inset-0 z-10 flex items-center justify-between px-6 bg-slate-900/90 backdrop-blur-sm group-hover:text-white rounded-lg border border-white/5">
           <div class="flex items-center gap-4">
-            <span class="iconify text-gray-700 group-hover:text-white/80 transition-colors"
+            <span class="iconify text-gray-400 group-hover:text-white/90 transition-colors"
               data-icon="lucide:message-square" data-width="16"></span>
-            <span
-              class="text-sm font-semibold tracking-tight text-gray-900 group-hover:text-white transition-colors">Team
+            <span class="text-sm font-medium tracking-tight text-gray-200 group-hover:text-white transition-colors">Team
               Chat</span>
           </div>
           <button
-            class="share-btn flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md border border-gray-300 bg-white text-xs font-semibold tracking-wide text-gray-700 shadow-sm hover:border-white/20 hover:bg-white/10 hover:text-white">
+            class="share-btn flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md border border-gray-600 bg-slate-800 text-xs font-semibold tracking-wide text-gray-300 shadow-sm hover:border-white/40 hover:bg-slate-700 hover:text-white">
             <span>Copy</span>
             <span class="iconify" data-icon="lucide:copy" data-width="12"></span>
           </button>
@@ -244,7 +293,7 @@
 
       <!-- Card 8 -->
       <div
-        class="card group relative h-16 w-full cursor-pointer overflow-hidden rounded-lg border border-indigo-100 group-hover:border-indigo-300 shadow shadow-indigo-50"
+        class="card group relative h-16 w-full cursor-pointer overflow-hidden rounded-lg border border-gray-700 hover:border-gray-500 shadow-sm transition-colors"
         data-link="https://analytics.google.com/view/8">
         <div class="absolute inset-0 z-0">
           <img class="bg-img h-full w-full object-cover opacity-25 group-hover:opacity-15 transition-opacity"
@@ -252,16 +301,16 @@
             alt="Abstract">
         </div>
         <div
-          class="meta-bar absolute inset-0 z-10 flex items-center justify-between px-6 bg-white/95 backdrop-blur-md group-hover:text-white rounded-lg">
+          class="meta-bar absolute inset-0 z-10 flex items-center justify-between px-6 bg-slate-900/90 backdrop-blur-sm group-hover:text-white rounded-lg border border-white/5">
           <div class="flex items-center gap-4">
-            <span class="iconify text-gray-700 group-hover:text-white/80 transition-colors"
+            <span class="iconify text-gray-400 group-hover:text-white/90 transition-colors"
               data-icon="lucide:bar-chart-2" data-width="16"></span>
             <span
-              class="text-sm font-semibold tracking-tight text-gray-900 group-hover:text-white transition-colors">Analytics
+              class="text-sm font-medium tracking-tight text-gray-200 group-hover:text-white transition-colors">Analytics
               View</span>
           </div>
           <button
-            class="share-btn flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md border border-gray-300 bg-white text-xs font-semibold tracking-wide text-gray-700 shadow-sm hover:border-white/20 hover:bg-white/10 hover:text-white">
+            class="share-btn flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md border border-gray-600 bg-slate-800 text-xs font-semibold tracking-wide text-gray-300 shadow-sm hover:border-white/40 hover:bg-slate-700 hover:text-white">
             <span>Copy</span>
             <span class="iconify" data-icon="lucide:copy" data-width="12"></span>
           </button>
@@ -279,21 +328,16 @@
         const btn = card.querySelector('.share-btn');
         const btnText = btn.querySelector('span:first-child');
 
-        // Card click (except button) opens the link
+        // Clicking the card (except the button) opens the link
         card.addEventListener('click', (e) => {
-          if (e.target.closest('.share-btn')) return;
+          if (e.target.closest('.share-btn')) return; // Don't open link if button was clicked
+
           window.open(link, '_blank');
         });
 
-        // Share button: Copy to clipboard
-        // Hold SHIFT + Click → Open link instead
+        // Clicking the share button copies the link
         btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-
-          if (e.shiftKey) {
-            window.open(link, '_blank');
-            return;
-          }
+          e.stopPropagation(); // Prevent card click from triggering
 
           const originalText = btnText.textContent;
 

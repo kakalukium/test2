@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "src/input.css": "postcss"
+  },
+  "css.validate": false,
+  "postcss.validate": true
+}
